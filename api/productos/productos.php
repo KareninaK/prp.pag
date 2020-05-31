@@ -18,11 +18,13 @@ class Productos extends DB{
                 'nombre'    => $row['nombre'],
                 'precio'    => $row['precio'],
                 'categoria' => $row['categoria'],
-                'estado'    => $row['estado'],
-                'imagen'    => $row['imagen'],
-                'imagen'    => $row['imagen'],
+                'tama'      => $row['tama'],
                 'foto1'     => $row['foto1'],
-                'foto2'     => $row['foto2']
+                'foto2'     => $row['foto2'],
+                'foto3'     => $row['foto3'],
+                'foto4'     => $row['foto4'],
+                'foto5'     => $row['foto5'],
+                'foto6'     => $row['foto6']
 
                 ];
     }
@@ -38,10 +40,14 @@ class Productos extends DB{
                     'nombre'    => $row['nombre'],
                     'precio'    => $row['precio'],
                     'categoria' => $row['categoria'],
-                    'estado'    => $row['estado'],
-                    'imagen'    => $row['imagen'],
+                    'tama'      => $row['tama'],
                     'foto1'     => $row['foto1'],
-                    'foto2'     => $row['foto2']
+                    'foto2'     => $row['foto2'],
+                    'foto3'     => $row['foto3'],
+                    'foto4'     => $row['foto4'],
+                    'foto5'     => $row['foto5'],
+                    'foto6'     => $row['foto6']
+
                     ];
             array_push($items, $item);
         }
