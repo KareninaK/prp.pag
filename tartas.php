@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mara CAKE</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -14,12 +13,12 @@
 
     <main>
         <?php
-            $response = json_decode(file_get_contents('http://localhost/ProyectosK/Shop/api/productos/api-productos.php?categoria=torta'), true);
+            $response = json_decode(file_get_contents('http://localhost/ProyectosK/Shop/api/productos/api-productos.php?categoria=tarta'), true);
             if($response['statuscode'] == 200){
                 foreach($response['items'] as $item){
                     include('layout/items.php');
                 }
-            }else{
+             }else{
                 echo $response['response'];
             }
         ?>
