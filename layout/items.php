@@ -6,9 +6,9 @@
     <div class="imagen"><img src="img/<?php echo $item['foto4'];  ?>" /></div>
     <div class="imagen"><img src="img/<?php echo $item['foto5'];  ?>" /></div>
     <div class="imagen"><img src="img/<?php echo $item['foto6'];  ?>" /></div>
-    <div class="titulo"><?php echo $item['nombre'];  ?></div>
-    <div class="precio">$<?php echo $item['precio'];  ?> Arg</div>
-
+    <div class="titulo"><?php echo $item['nombre']; ?></div>
+    <div class="precio">$<?php echo $item['precio'];?> Arg</div>
+    <div class="precio"><?php echo $item['descrip'];?></div>
    <!-- <div class="botones">
         <button>Agregar al carrito</button>
     </div> -->
