@@ -22,16 +22,21 @@
         <?php
             $response = json_decode(file_get_contents('http://localhost/ProyectosK/Shop/api/productos/api-productos.php?categoria=tarta'), true);
             if($response['statuscode'] == 200){
-                foreach($response['items'] as $item){
-                    include('layout/items.php');
-                }
-             }else{
+                foreach($response['items'] as $item){?>
+                    <td> <?php echo $item['nombre'];  ?> </td>
+                    <td> <?php if($item['precio']!=''){echo "$".$item['precio'];  }?> </td>
+                    <td> <img witdth="50px" height="50px" src="img/<?php echo $item['foto1']; ?>"> </td>
+                    <td> <?php if($item['foto2']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $item['foto2']; ?>"><?php ; } ?></td>
+                    <td> <?php if($item['foto3']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $item['foto3']; ?>"><?php ; } ?></td>
+                    <td> <?php if($item['foto4']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $item['foto4']; ?>"><?php ; } ?></td>
+                    <td> <?php if($item['foto5']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $item['foto5']; ?>"><?php ; } ?></td>
+                    <td> <?php if($item['foto6']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $item['foto6']; ?>"><?php ; } ?></td><br>
+               <?php }
+            }else{
                 echo $response['response'];
             }
-        ?>
-        
+        ?>       
     </main>
-
     <script src="js/main.js"></script>
 </body>
 </html>

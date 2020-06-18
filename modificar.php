@@ -13,6 +13,7 @@ include ("lib/config.php");
 			$imagen4= (isset($_FILES['imagen4']['name']))?$_FILES['imagen4']['name']:NULL;
 			$imagen5= (isset($_FILES['imagen5']['name']))?$_FILES['imagen5']['name']:NULL;
 			$imagen6= (isset($_FILES['imagen6']['name']))?$_FILES['imagen6']['name']:NULL;
+			$descrip= (isset($_POST['descrip']))         ?$_POST['descrip']         :NULL;
 
 			$tamanio_imagen1=$_FILES['imagen1']['size'];
 			$tamanio_imagen2=$_FILES['imagen2']['size'];
@@ -33,7 +34,7 @@ include ("lib/config.php");
 					//ruta de la carpeta destino en el servidor
 					$carpeta_destino=$_SERVER['DOCUMENT_ROOT'].'/ProyectosK/Shop/img/';
 
-					$sqlM = "UPDATE ITEMS SET NOMBRE='$nombre', PRECIO='$precio', CATEGORIA='$cat', TAMA='$tamaño' WHERE ID=$id";
+					$sqlM = "UPDATE ITEMS SET NOMBRE='$nombre', PRECIO='$precio', CATEGORIA='$cat', TAMA='$tamaño', DESCRIP='$descrip' WHERE ID=$id";
 					$result = $base->prepare($sqlM);
 					$result->execute();		
 					
@@ -85,15 +86,11 @@ include ("lib/config.php");
 						$result = $base->prepare($sqlF);
 					$result->execute();
 						}
-
 					Echo "Buena CRACK!!";
-
 			}else{
 				echo "El tamanio de la imagen es muy grande" ;
 			}
-
 		}
-
 
 	if (empty($_GET['id'])){
 		header('Location: FormDeCarga.php');
@@ -110,19 +107,21 @@ if($row == 0){
 header('Location: FormDeCarga.php');	
 }else{
 	$optionT='';
+	$optionC='';
 	$lista=$res->fetchAll(PDO::FETCH_ASSOC);
 	foreach ($lista as $result ){
-		$id = $result['id']; 
-		$nombre = $result['nombre'];  
-		$precio = $result['precio'];
-		$categoria = $result['categoria'];
-		$tamaño = $result['tama'];
-		$foto1 = $result['foto1']; 
-		$foto2 = $result['foto2'];
-		$foto3 = $result['foto3'];
-		$foto4 = $result['foto4']; 
-		$foto5 = $result['foto5']; 
-		$foto6 = $result['foto6'];
+		$id           = $result['id']; 
+		$nombre       = $result['nombre'];  
+		$precio       = $result['precio'];
+		$categoria    = $result['categoria'];
+		$tamaño       = $result['tama'];
+		$foto1        = $result['foto1']; 
+		$foto2        = $result['foto2'];
+		$foto3        = $result['foto3'];
+		$foto4        = $result['foto4']; 
+		$foto5        = $result['foto5']; 
+		$foto6        = $result['foto6'];
+		$descrip      = $result['descrip'];
 
 		//actualizar el select de tamaño
 		if($result['tama']=='Mini'){
@@ -167,19 +166,19 @@ header('Location: FormDeCarga.php');
 		<table>
 			<tr>
 				<td>
-					<input type="hidden" name="id" placeholder="" id="id"  value="<?php echo $id;?>"">	
+					<input type="hidden" name="id" placeholder="" id="id"  value="<?php echo $id;?>">	
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="articulo">Nombre del articulo:</label>
-					<input type="text"  name="name" placeholder="" id="name" required value="<?php echo $nombre;?>">
+					<input type="text" name="name" placeholder="" id="name" required value="<?php echo $nombre;?>">
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="articulo">Precio: $</label>
-					<input type="number"  name="price"  placeholder="" id="price" value="<?php echo $precio;?>">
+					<input type="number" name="price"  placeholder="" id="price" value="<?php echo $precio;?>">
 				</td>
 			</tr>
 			<tr>
@@ -218,40 +217,46 @@ header('Location: FormDeCarga.php');
 				<td>
 					<label for ="articulo">Imagen2:</label>
 					<input type="file" accept="image/*" name="imagen2" size="20" placeholder="" id="imagen2">
-					<?php if($result['foto2']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto2']; ?>"><?php ; } ?>
+					<?php if($result['foto2']!=''){?><img witdth="50px" height="50px" src="img/<?php echo $result['foto2']; ?>"><?php ; } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for ="articulo">Imagen3:</label>
 					<input type="file" accept="image/*" name="imagen3" size="20" placeholder="" id="imagen3">
-					<?php if($result['foto3']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto3']; ?>"><?php ; } ?>
+					<?php if($result['foto3']!=''){?><img witdth="50px" height="50px" src="img/<?php echo $result['foto3']; ?>"><?php ; } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for ="articulo">Imagen4:</label>
 					<input type="file" accept="image/*" name="imagen4" size="20" placeholder="" id="imagen4">
-					<?php if($result['foto4']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto4']; ?>"><?php ; } ?>
+					<?php if($result['foto4']!=''){?><img witdth="50px" height="50px" src="img/<?php echo $result['foto4']; ?>"><?php ; } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for ="articulo">Imagen5:</label>
 					<input type="file" accept="image/*" name="imagen5" size="20" placeholder="" id="imagen5">
-					<?php if($result['foto5']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto5']; ?>"><?php ; } ?>
+					<?php if($result['foto5']!=''){?><img witdth="50px" height="50px" src="img/<?php echo $result['foto5']; ?>"><?php ; } ?>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for ="articulo">Imagen6:</label>
 					<input type="file" accept="image/*" name="imagen6" size="20" placeholder="" id="imagen6">
-					<?php if($result['foto6']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto6']; ?>"><?php ; } ?>
+					<?php if($result['foto6']!=''){?><img witdth="50px" height="50px" src="img/<?php echo $result['foto6']; ?>"><?php ; } ?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for ="articulo">Descripción:</label>
+					<textarea name="descrip" rows="10" cols="50" placeholder="" id="descrip"><?php echo $descrip; ?></textarea>
 				</td>
 			</tr>
 			<br>
 			<td colspan="2" style="text-align:center">
-			<button type="submit" value="Modificar" >Modificar</button>
+			<button type="submit" value="Modificar">Modificar</button>
 			<a href="FormDeCarga.php"><input type="button" value="Volver"></a>
 			</td>
 

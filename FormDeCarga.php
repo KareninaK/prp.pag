@@ -16,8 +16,9 @@ $imagen3= (isset($_FILES['imagen3']['name']))?$_FILES['imagen3']['name']:NULL;
 $imagen4= (isset($_FILES['imagen4']['name']))?$_FILES['imagen4']['name']:NULL;
 $imagen5= (isset($_FILES['imagen5']['name']))?$_FILES['imagen5']['name']:NULL;
 $imagen6= (isset($_FILES['imagen6']['name']))?$_FILES['imagen6']['name']:NULL;
+$descrip= (isset($_POST['descrip']))         ?$_POST['descrip']         :NULL;
 
-$accion=(isset($_POST['accion']))?$_POST['accion']:"";
+$accion=  (isset($_POST['accion']))          ?$_POST['accion']          :"";
 
 include ("lib/config.php");
 
@@ -45,8 +46,7 @@ switch($accion){
 				move_uploaded_file($_FILES['imagen5']['tmp_name'],$carpeta_destino.$imagen5);
 				move_uploaded_file($_FILES['imagen6']['tmp_name'],$carpeta_destino.$imagen6);
 				
-				$sqlA = "INSERT INTO ITEMS (NOMBRE, PRECIO, CATEGORIA, TAMA, FOTO1, FOTO2, FOTO3, FOTO4, FOTO5, FOTO6) VALUES ('$nombre',$precio,'$cat','$tamaño','$imagen1','$imagen2','$imagen3','$imagen4','$imagen5','$imagen6')";
-				
+				$sqlA = "INSERT INTO ITEMS (NOMBRE, PRECIO, CATEGORIA, TAMA, FOTO1, FOTO2, FOTO3, FOTO4, FOTO5, FOTO6, DESCRIP) VALUES ('$nombre',$precio,'$cat','$tamaño','$imagen1','$imagen2','$imagen3','$imagen4','$imagen5','$imagen6','$descrip')";
 				$resultado = $base->prepare($sqlA);
 				$resultado->execute();
 			
@@ -67,7 +67,7 @@ switch($accion){
 	break;
 
 	case"Cancelar":
-	header('location: FormDeCarga.php');
+	header('location:FormDeCarga.php');
 	break;
 }
 
@@ -164,6 +164,12 @@ $lista=$res->fetchAll(PDO::FETCH_ASSOC);
 					<input type="file" accept="image/*" name="imagen6" size="20" placeholder="" id="imagen6">
 				</td>
 			</tr>	
+			<tr>
+				<td>
+					<label for ="articulo">Descripción:</label>
+					<textarea name="descrip" rows="10" cols="50"  id="descrip"  placeholder="Agrega una descripción..."></textarea>
+				</td>
+			</tr>
 				<td colspan="2" style="text-align:center">
 					<br>	
 					<button type="submit" name="accion" value="Agregar">Agregar</button>			
@@ -188,7 +194,8 @@ $lista=$res->fetchAll(PDO::FETCH_ASSOC);
 					<td>Imagen4</td>
 					<td>Imagen5</td>
 					<td>Imagen6</td>
-					<td>Accion</td>
+					<td>Descripción</td>
+					<td>Acción</td>
 				</tr>
 			</thead>
 
@@ -206,6 +213,7 @@ $lista=$res->fetchAll(PDO::FETCH_ASSOC);
 				<td> <?php if($result['foto4']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto4']; ?>"><?php ; } ?></td>
 				<td> <?php if($result['foto5']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto5']; ?>"><?php ; } ?></td>
 				<td> <?php if($result['foto6']!=''){?> <img witdth="50px" height="50px" src="img/<?php echo $result['foto6']; ?>"><?php ; } ?></td>
+				<td> <?php if($result['descrip']!=''){echo $result['descrip'] ; } ?></td>
 			<td>
 				<form accion="" method="POST">	
 					<input type="hidden" name="id" value="<?php echo $result['id']; ?>">				
@@ -219,14 +227,14 @@ $lista=$res->fetchAll(PDO::FETCH_ASSOC);
 					<input type="hidden" name="imagen4" value="<?php echo $result['foto4']; ?>">
 					<input type="hidden" name="imagen5" value="<?php echo $result['foto5']; ?>">
 					<input type="hidden" name="imagen6" value="<?php echo $result['foto6']; ?>">
+					<input type="hidden" name="descrip" value="<?php echo $result['descrip']; ?>">
 					<a href="modificar.php?id=<?php echo $result['id']; ?>"><input type="button" value="Modificar"></a>
 					<button type="submit" name="accion" value="Eliminar">Eliminar</button>
 				</form>
 			</td>
 			</tr>
 			
-		<?php 
-				
+		<?php 			
 		} ?>
 			
 		</table>	
