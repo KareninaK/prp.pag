@@ -24,7 +24,8 @@ class Productos extends DB{
                 'foto3'     => $row['foto3'],
                 'foto4'     => $row['foto4'],
                 'foto5'     => $row['foto5'],
-                'foto6'     => $row['foto6']
+                'foto6'     => $row['foto6'],
+                'descrip'   => $row['descrip']
 
                 ];
     }
@@ -46,7 +47,8 @@ class Productos extends DB{
                     'foto3'     => $row['foto3'],
                     'foto4'     => $row['foto4'],
                     'foto5'     => $row['foto5'],
-                    'foto6'     => $row['foto6']
+                    'foto6'     => $row['foto6'],
+                    'descrip'   => $row['descrip']
 
                     ];
             array_push($items, $item);
